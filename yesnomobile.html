@@ -1,12 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Cute Proposal ❤️</title>
 
 <style>
@@ -79,7 +75,7 @@ body{
     z-index:2;
 }
 
-/* Cute Heading */
+/* Heading */
 
 h1{
 
@@ -194,7 +190,6 @@ button{
 }
 
 </style>
-
 </head>
 
 <body>
@@ -248,22 +243,20 @@ const yesBtn = document.getElementById("yesBtn");
 
 const message = document.getElementById("message");
 
-/* AUDIO */
+/* Audio */
 
 const noSound =
-    document.getElementById("noSound");
+document.getElementById("noSound");
 
 const yesSound =
-    document.getElementById("yesSound");
+document.getElementById("yesSound");
 
 const loveMusic =
-    document.getElementById("loveMusic");
+document.getElementById("loveMusic");
 
-/* MOVE NO BUTTON */
+/* Move NO Button */
 
 function moveNoButton(){
-
-    /* Funny Sound */
 
     noSound.currentTime = 0;
 
@@ -274,34 +267,30 @@ function moveNoButton(){
     const btnHeight = noBtn.offsetHeight;
 
     const maxX =
-        window.innerWidth - btnWidth;
+    window.innerWidth - btnWidth;
 
     const maxY =
-        window.innerHeight - btnHeight;
+    window.innerHeight - btnHeight;
 
     const randomX =
-        Math.random() * maxX;
+    Math.random() * maxX;
 
     const randomY =
-        Math.random() * maxY;
+    Math.random() * maxY;
 
     noBtn.style.position = "fixed";
 
     noBtn.style.left =
-        randomX + "px";
+    randomX + "px";
 
     noBtn.style.top =
-        randomY + "px";
-
-    /* Random Rotation */
+    randomY + "px";
 
     const rotate =
-        Math.random() * 40 - 20;
+    Math.random() * 40 - 20;
 
     noBtn.style.transform =
-        `rotate(${rotate}deg)`;
-
-    /* Funny Text */
+    `rotate(${rotate}deg)`;
 
     const texts = [
 
@@ -324,90 +313,84 @@ function moveNoButton(){
 
     noBtn.innerHTML =
 
-        texts[
-            Math.floor(
-                Math.random() * texts.length
-            )
-        ];
+    texts[
+        Math.floor(
+            Math.random() * texts.length
+        )
+    ];
 }
 
 /* Desktop */
 
 noBtn.addEventListener(
-    "mouseover",
-    moveNoButton
+"mouseover",
+moveNoButton
 );
 
 /* Mobile */
 
 noBtn.addEventListener(
-    "touchstart",
-    function(e){
+"touchstart",
+function(e){
 
-        e.preventDefault();
+    e.preventDefault();
+
+    moveNoButton();
+}
+);
+
+/* Mouse Close Detection */
+
+document.addEventListener(
+"mousemove",
+(e) => {
+
+    const rect =
+    noBtn.getBoundingClientRect();
+
+    const distanceX =
+    e.clientX - rect.left;
+
+    const distanceY =
+    e.clientY - rect.top;
+
+    const distance = Math.sqrt(
+
+        distanceX * distanceX +
+
+        distanceY * distanceY
+    );
+
+    if(distance < 120){
 
         moveNoButton();
     }
+}
 );
 
-/* Cursor Near = Escape */
-
-document.addEventListener(
-    "mousemove",
-    (e) => {
-
-        const rect =
-            noBtn.getBoundingClientRect();
-
-        const distanceX =
-            e.clientX - rect.left;
-
-        const distanceY =
-            e.clientY - rect.top;
-
-        const distance = Math.sqrt(
-
-            distanceX * distanceX +
-
-            distanceY * distanceY
-        );
-
-        if(distance < 120){
-
-            moveNoButton();
-        }
-    }
-);
-
-/* YES BUTTON */
+/* YES Button */
 
 yesBtn.addEventListener(
-    "click",
-    () => {
+"click",
+() => {
 
-        /* Success Sound */
+    yesSound.play();
 
-        yesSound.play();
+    loveMusic.volume = 0.5;
 
-        /* Romantic Music */
+    loveMusic.play();
 
-        loveMusic.volume = 0.5;
+    yesBtn.style.display = "none";
 
-        loveMusic.play();
+    noBtn.style.display = "none";
 
-        yesBtn.style.display = "none";
+    message.style.display = "block";
 
-        noBtn.style.display = "none";
+    for(let i=0;i<120;i++){
 
-        message.style.display = "block";
-
-        /* Heart Explosion */
-
-        for(let i=0;i<120;i++){
-
-            createHeart();
-        }
+        createHeart();
     }
+}
 );
 
 /* Floating Hearts */
@@ -415,7 +398,7 @@ yesBtn.addEventListener(
 function createHeart(){
 
     const heart =
-        document.createElement("div");
+    document.createElement("div");
 
     heart.classList.add("heart");
 
@@ -434,20 +417,20 @@ function createHeart(){
 
     heart.innerHTML =
 
-        emojis[
-            Math.floor(
-                Math.random() * emojis.length
-            )
-        ];
+    emojis[
+        Math.floor(
+            Math.random() * emojis.length
+        )
+    ];
 
     heart.style.left =
-        Math.random() * 100 + "vw";
+    Math.random() * 100 + "vw";
 
     heart.style.fontSize =
-        (Math.random() * 30 + 20) + "px";
+    (Math.random() * 30 + 20) + "px";
 
     heart.style.animationDuration =
-        (Math.random() * 2 + 2) + "s";
+    (Math.random() * 2 + 2) + "s";
 
     document.body.appendChild(heart);
 
@@ -465,5 +448,4 @@ setInterval(createHeart,200);
 </script>
 
 </body>
-
 </html>
